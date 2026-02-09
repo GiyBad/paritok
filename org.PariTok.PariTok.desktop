@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=PariTok
+Exec=run.sh
+Icon=org.PariTok.PariTok
+Terminal=false
+Type=Application
+Categories=Utility;
+Comment=PariTok для Linux

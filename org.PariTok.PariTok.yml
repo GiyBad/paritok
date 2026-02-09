@@ -1,0 +1,45 @@
+app-id: org.PariTok.PariTok
+runtime: org.freedesktop.Platform
+runtime-version: '23.08'
+sdk: org.freedesktop.Sdk
+command: run.sh
+
+finish-args:
+  - --socket=x11
+  - --socket=wayland
+  - --share=ipc
+  - --device=dri
+  - --socket=pulseaudio
+  - --share=network
+  - --talk-name=org.freedesktop.Notifications
+
+modules:
+  - name: paritok
+    buildsystem: simple
+    build-commands:
+      # Установка файлов приложения
+      - mkdir -p /app/bin
+      - cp -r . /app/bin/
+      # Создаем скрипт запуска, если его нет в архиве
+      - |
+        if [ ! -f /app/bin/run.sh ]; then
+          echo '#!/bin/sh' > /app/bin/run.sh
+          echo 'exec /app/bin/PariTok --no-sandbox "$@"' >> /app/bin/run.sh
+        fi
+      - chmod +x /app/bin/PariTok
+      - chmod +x /app/bin/run.sh
+      # Установка метаданных
+      - install -D org.PariTok.PariTok.desktop /app/share/applications/org.PariTok.PariTok.desktop
+      - install -D org.PariTok.PariTok.png /app/share/icons/hicolor/128x128/apps/org.PariTok.PariTok.png
+      - install -D org.PariTok.PariTok.metainfo.xml /app/share/metainfo/org.PariTok.PariTok.metainfo.xml
+
+    sources:
+      - type: archive
+        url: ССЫЛКА_НА_ZIP_В_GITHUB_RELEASES
+        sha256: SHA256_АРХИВА
+      - type: file
+        path: org.PariTok.PariTok.desktop
+      - type: file
+        path: org.PariTok.PariTok.png
+      - type: file
+        path: org.PariTok.PariTok.metainfo.xml

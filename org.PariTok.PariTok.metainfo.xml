@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+    <id>org.PariTok.PariTok</id>
+    <metadata_license>CC0-1.0</metadata_license>
+    <project_license>MIT</project_license>
+    <name>PariTok</name>
+    <summary>Приложение PariTok</summary>
+    <description>
+        <p>PariTok — это удобное приложение, теперь доступное на Linux через Flatpak.</p>
+    </description>
+    <launchable type="desktop-id">org.PariTok.PariTok.desktop</launchable>
+    <url type="homepage">https://github.com/ТВОЙ_ЛОГИН/PariTok</url>
+    <content_rating type="oars-1.1" />
+</component>
