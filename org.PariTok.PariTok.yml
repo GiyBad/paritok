@@ -17,26 +17,32 @@ modules:
   - name: paritok
     buildsystem: simple
     build-commands:
-      # Установка файлов приложения
+      # Создание структуры папок
       - mkdir -p /app/bin
+      - mkdir -p /app/share/applications
+      - mkdir -p /app/share/icons/hicolor/128x128/apps
+      - mkdir -p /app/share/metainfo
+      
+      # Распаковка приложения
       - cp -r . /app/bin/
-      # Создаем скрипт запуска, если его нет в архиве
+      
+      # Создание скрипта запуска
       - |
-        if [ ! -f /app/bin/run.sh ]; then
-          echo '#!/bin/sh' > /app/bin/run.sh
-          echo 'exec /app/bin/PariTok --no-sandbox "$@"' >> /app/bin/run.sh
-        fi
+        echo '#!/bin/sh' > /app/bin/run.sh
+        echo 'exec /app/bin/PariTok --no-sandbox "$@"' >> /app/bin/run.sh
+      
       - chmod +x /app/bin/PariTok
       - chmod +x /app/bin/run.sh
-      # Установка метаданных
+
+      # Установка ресурсов
       - install -D org.PariTok.PariTok.desktop /app/share/applications/org.PariTok.PariTok.desktop
       - install -D org.PariTok.PariTok.png /app/share/icons/hicolor/128x128/apps/org.PariTok.PariTok.png
       - install -D org.PariTok.PariTok.metainfo.xml /app/share/metainfo/org.PariTok.PariTok.metainfo.xml
 
     sources:
       - type: archive
-        url: ССЫЛКА_НА_ZIP_В_GITHUB_RELEASES
-        sha256: SHA256_АРХИВА
+        url: https://github.com/GiyBad/paritok/releases/download/v1.0.1/Paritok-linux-x64.zip
+        sha256: 93ca37b699040ae27341f9063540b7a1a2ef9af9dece0170c71900912280e074
       - type: file
         path: org.PariTok.PariTok.desktop
       - type: file
